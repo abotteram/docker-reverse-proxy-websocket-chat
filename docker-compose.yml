@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  proxy:
+    depends_on:
+      - api
+    build: ./proxy
+    ports:
+      - 80:80
+    volumes:
+      - ./proxy:/usr/share/nginx/html/
+  api:
+    image: node
+    volumes:
+      - ./api:/usr/src/service
+    working_dir: /usr/src/service
+    command: yarn start:dev
